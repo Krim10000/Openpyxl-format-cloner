@@ -11,11 +11,11 @@ Supported characteristic:
 
 .-Merged cells
 
-.-Number formats # Doesn't to have any effect.
+.-Number formats # Doesn't seem to have any effect.
 
 .-Row heights
 
-.-Column width # from A to Z for now.
+.-Column width # Only from A to Z for now.
 
 .-Values
 
@@ -35,21 +35,21 @@ Starting
 
 Extracting Merged cells
 
- Extracting Number formats
+Extracting Number formats
  
-  Extracting Row heights
+Extracting Row heights
   
-   Extracting Column width
+Extracting Column width
    
-    Extracting Values
+Extracting Values
     
-     Extracting Fonts
+Extracting Fonts
      
-      Extracting Alignments
-      
-       Extracting Fills
+Extracting Alignments
+     
+Extracting Fills
        
-         Extracting Borders
+Extracting Borders
          
 
 The program scaned 3424 cells
