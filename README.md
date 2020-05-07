@@ -10,13 +10,21 @@ Name the file that you want to clone as "format.xlsx" and place it in the same d
 Supported characteristic: 
 
 .-Merged cells
+
 .-Number formats # Doesn't to have any effect.
+
 .-Row heights
+
 .-Column width # from A to Z for now.
+
 .-Values
+
 .-Fonts
+
 .-Alignments
+
 .-Fills
+
 .-Borders # No diagonals.
 
 
@@ -24,15 +32,25 @@ Supported characteristic:
 Successful clonation:
 
 Starting
+
 Extracting Merged cells
+
  Extracting Number formats
+ 
   Extracting Row heights
+  
    Extracting Column width
+   
     Extracting Values
+    
      Extracting Fonts
+     
       Extracting Alignments
+      
        Extracting Fills
+       
          Extracting Borders
+         
 
 The program scaned 3424 cells
 
