@@ -51,7 +51,7 @@ file1.write("\n")
 
 
 while lenM  > 4:
-    
+
     try:
         searchM = re.search("<CellRange ", MERGE) #  busca <CellRange :
         inicioM=searchM.end()
@@ -66,7 +66,7 @@ while lenM  > 4:
 
     except:
         break
-    
+
 #number formats # DOSENT SEEM TO CHANGE THE FILE IN ANY WAY #2
 print(" Extracting Number formats")
 file1.write("\n")
@@ -74,7 +74,7 @@ file1.write("\n")
 file1.write("\n")
 for row in rs.rows:
     for cell in row:
-                             
+
         text=(str(cell))#<Cell 'Sheet1'.D8>=None
 
         #Conviernte <Cell 'Sheet1'.D8>=None en D8
@@ -83,7 +83,7 @@ for row in rs.rows:
         CELL = text[start:end]
         CELL1 =("\'"+CELL+ "\'")
         #rs['A2'].number_format
-        
+
 
         NUMF = ("ws["+CELL1+"].number_format ")#bien
         NUMF0= (rs[CELL].number_format)
@@ -92,8 +92,8 @@ for row in rs.rows:
         if NUMF0 != "General":
             file1.write(NUMF2)
             file1.write("\n")
-           
- 
+
+
 file1.write("\n")
 file1.write("\n")
 
@@ -112,12 +112,12 @@ for hrow in range (1, rs.max_row+1):
     file1.write(HROW2)
     file1.write("\n")
 
-print("   Extracting Column width") # ITS THE BANE OF MY EXISTENCE, # IT SEEMS TO WORK IN WORKBOOK, BUT NOT IN LOAD_WOORKBOOK IDW 
-    
+print("   Extracting Column width") # ITS THE BANE OF MY EXISTENCE, # IT SEEMS TO WORK IN WORKBOOK, BUT NOT IN LOAD_WOORKBOOK IDW
+
 file1.write("#column width:")
 for wcol in range (1, rs.max_column):
-    
-    
+
+
     file1.write("\n")
     WCOL1= chr(ord('@')+wcol)
     WCOL2 = ("wcol"+str(WCOL1) + " = " +str(rs.column_dimensions[WCOL1].width))
@@ -132,10 +132,10 @@ print("    Extracting Values")
 file1.write("\n")
 for row in rs.rows:
     for cell in row:
-        
-        
+
+
         #print(cell.value)
-        
+
         text=(str(cell))#<Cell 'Sheet1'.D8>=None
 
 
@@ -144,21 +144,28 @@ for row in rs.rows:
         end = text.find(">", start)
         CELL = text[start:end]
 
+        def safeStr(obj):
+            try: return str(obj)
+            except UnicodeEncodeError:
+                return obj.encode('ascii', 'ignore').decode('ascii')
+            except: return ""
+
         CONT = str("ws[\""+CELL+ "\"] = ")
-        CONT1 = (str(cell.value))
+        CONT1 = safeStr(cell.value)
+        #CONT1 = CONT1.decode('ascii', 'ignore')
         #print(str(cell))
         if CONT1 != "None":
             file1.write(CONT + "\""+CONT1 +"\"")
             file1.write("\n")
             #print(CONT + "\""+CONT1 +"\"")
-        
-        
-print("     Extracting Fonts") 
+
+
+print("     Extracting Fonts")
 i = 0
 for row in rs.rows:
     for cell in row:
         i = i +1
-        
+
         #print(cell.value)
         text=(str(cell))#<Cell 'Sheet1'.D8>=None
 
@@ -167,7 +174,7 @@ for row in rs.rows:
         start =text.find(".")+1
         end = text.find(">", start)
         CELL = text[start:end]
-        
+
         #Font
         X = ("%s"% (CELL,))
         FONT=rs[X].font
@@ -239,11 +246,11 @@ for row in rs.rows:
 
 
         #Alignment
-print("      Extracting Alignments") 
-        
+print("      Extracting Alignments")
+
 for row in rs.rows:
     for cell in row:
-        
+
         #print(cell.value)
         text=(str(cell))#<Cell 'Sheet1'.D8>=None
 
@@ -252,7 +259,7 @@ for row in rs.rows:
         start =text.find(".")+1
         end = text.find(">", start)
         CELL = text[start:end]
-       
+
         X = ("%s"% (CELL,))
         ALIG=rs[X].alignment
         ALIG = str(ALIG)
@@ -295,7 +302,7 @@ for row in rs.rows:
         ",wrap_text="+wrap_text+
         ",shrink_to_fit="+shrink_to_fit+
         ",indent="+indent+")")
-        
+
         ALIG1 = str("alig"+CELL + " = "+ALIG0)
 
         ALIG2 = "ws[\""+CELL+ "\"].alignment = alig"+CELL
@@ -309,14 +316,14 @@ for row in rs.rows:
             file1.write("\n")
             file1.write("\n")
 
-            
+
 
 #Fill
-print("       Extracting Fills") 
-        
+print("       Extracting Fills")
+
 for row in rs.rows:
     for cell in row:
-        
+
         #print(cell.value)
         text=(str(cell))#<Cell 'Sheet1'.D8>=None
 
@@ -325,7 +332,7 @@ for row in rs.rows:
         start =text.find(".")+1
         end = text.find(">", start)
         CELL = text[start:end]
-           
+
         X = ("%s"% (CELL,))
         FILL=rs[X].fill
         FILL = str(FILL)
@@ -356,7 +363,7 @@ for row in rs.rows:
         ",end_color="+end_color+
         ")")
 
-        
+
 
         FILL2 = "ws[\""+CELL+ "\"].fill = fill"+CELL
         FILL2= str(FILL2)
@@ -370,15 +377,15 @@ for row in rs.rows:
             file1.write("\n")
 
 
-            
+
 
 #Borders          #DIAGONALS NOT INCLUDED.
 
-print("         Extracting Borders") 
-        
+print("         Extracting Borders")
+
 for row in rs.rows:
     for cell in row:
-        
+
         #print(cell.value)
         text=(str(cell))#<Cell 'Sheet1'.D8>=None
 
@@ -388,7 +395,7 @@ for row in rs.rows:
         end = text.find(">", start)
         CELL = text[start:end]
 
-          
+
 
         X = ("%s"% (CELL,))
         BORD=rs[X].border
@@ -401,7 +408,7 @@ for row in rs.rows:
 
         #LEFT
         #Sorry the Bord part of the code is potato.
-        
+
         search1 = re.search("style=", text) # busca style
         inicioN=search1.end()
         lent=len(text)
@@ -499,14 +506,14 @@ for row in rs.rows:
         ",color="+colorB+
         "))")
         BORD1 = str("bord"+CELL + " = " + BORD0)
-        
+
         BORDRR = "Border(left=Side(border_style=None,color=None),right=Side(border_style=None,color=None),top=Side(border_style=None,color=None),bottom=Side(border_style=None,color=None))"
         if BORD0 != BORDRR:
             file1.write(BORD1)
             file1.write("\n")
             BORD2 = "ws[\""+CELL+ "\"].border = bord"+CELL
             BORD2= str(BORD2)
-            file1.write(BORD2)  
+            file1.write(BORD2)
             file1.write("\n")
 
 
@@ -519,9 +526,9 @@ file1.write("wb.save('output.xlsx')")
 file1.write("\n")
 
 file1.write("print(\""+READY+"\")")
-    
 
-    
+
+
 
 file1.close()
 print("FORMAT.py is ready")
