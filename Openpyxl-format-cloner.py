@@ -33,39 +33,41 @@ file1.write("\n")
 print("Extracting Merged cells")# MERGE WORKS PERFECTLY #1
 
 MERGE = (rs.merged_cells.ranges)
-MERGE = str(MERGE)
-searchM = re.search("<CellRange ", MERGE) #  busca <CellRange :
-inicioM=searchM.end()
-lenM=len(MERGE)
-MERGE =MERGE[inicioM:lenM]
-searchMM = re.search(">", MERGE)
-MERGE1 =(MERGE[0:searchMM.end()-1])
+if len(MERGE) >0:
+    MERGE = str(MERGE)
+    searchM = re.search("<CellRange ", MERGE) #  busca <CellRange :
+    inicioM=searchM.end()
+    lenM=len(MERGE)
+    MERGE =MERGE[inicioM:lenM]
+    searchMM = re.search(">", MERGE)
+    MERGE1 =(MERGE[0:searchMM.end()-1])
 
 
 
-MERGE2 = str("\""+MERGE1+"\"")
-MERGE2 = (str("ws.merge_cells")+"("+MERGE2)+")"
-file1.write (MERGE2)
-file1.write("\n")
+    MERGE2 = str("\""+MERGE1+"\"")
+    MERGE2 = (str("ws.merge_cells")+"("+MERGE2)+")"
+    file1.write (MERGE2)
+    file1.write("\n")
 
 
 
-while lenM  > 4:
+    while lenM  > 4:
 
-    try:
-        searchM = re.search("<CellRange ", MERGE) #  busca <CellRange :
-        inicioM=searchM.end()
-        lenM=len(MERGE)
-        MERGE =MERGE[inicioM:lenM]
-        searchMM = re.search(">", MERGE)
-        MERGE1 =(MERGE[0:searchMM.end()-1])
-        MERGE2 = str("\""+MERGE1+"\"")
-        MERGE2 = (str("ws.merge_cells")+"("+MERGE2)+")"
-        file1.write(MERGE2)
-        file1.write("\n")
+        try:
+            searchM = re.search("<CellRange ", MERGE) #  busca <CellRange :
+            inicioM=searchM.end()
+            lenM=len(MERGE)
+            MERGE =MERGE[inicioM:lenM]
+            searchMM = re.search(">", MERGE)
+            MERGE1 =(MERGE[0:searchMM.end()-1])
+            MERGE2 = str("\""+MERGE1+"\"")
+            MERGE2 = (str("ws.merge_cells")+"("+MERGE2)+")"
+            file1.write(MERGE2)
+            file1.write("\n")
 
-    except:
-        break
+        except:
+            break
+
 
 #number formats # DOSENT SEEM TO CHANGE THE FILE IN ANY WAY #2
 print(" Extracting Number formats")
