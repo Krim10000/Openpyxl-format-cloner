@@ -1,7 +1,7 @@
 # Openpyxl-format-cloner
 An Excel format cloner based in openpyxl
-# Because im not going to that all that formating in my Django project by hand.
-V1.0
+# Because im not going to do that all that formating in my Django project by hand.
+V1.1
 
 Instructions:
 
