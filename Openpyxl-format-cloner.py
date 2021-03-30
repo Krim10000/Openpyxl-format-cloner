@@ -35,7 +35,7 @@ print("Extracting Merged cells")# MERGE WORKS PERFECTLY #1
 MERGE = (rs.merged_cells.ranges)
 if len(MERGE) >0:
     MERGE = str(MERGE)
-    searchM = re.search("<CellRange ", MERGE) #  busca <CellRange :
+    searchM = re.search("<MergedCellRange ", MERGE) #  busca <CellRange :
     inicioM=searchM.end()
     lenM=len(MERGE)
     MERGE =MERGE[inicioM:lenM]
@@ -54,7 +54,7 @@ if len(MERGE) >0:
     while lenM  > 4:
 
         try:
-            searchM = re.search("<CellRange ", MERGE) #  busca <CellRange :
+            searchM = re.search("<MergedCellRange ", MERGE) #  busca <CellRange :
             inicioM=searchM.end()
             lenM=len(MERGE)
             MERGE =MERGE[inicioM:lenM]
